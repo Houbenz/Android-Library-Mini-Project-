@@ -39,48 +39,45 @@ public class MainActivity extends AppCompatActivity {
         password=findViewById(R.id.passwordText);
         authentification = findViewById(R.id.authentification);
 
-        authentification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        authentification.setOnClickListener(view -> {
 
-                final String usernameString =username.getText().toString();
-                String passwordString = password.getText().toString();
+            final String usernameString =username.getText().toString();
+            String passwordString = password.getText().toString();
 
-                 String url ="http://192.168.43.210:7000/AuthentificationUser?username="+usernameString+"&password="+passwordString;
+             String url ="http://192.168.43.210:7000/AuthentificationUser?username="+usernameString+"&password="+passwordString;
 
-                StringRequest stringRequest= new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
+            StringRequest stringRequest= new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String s) {
 
-                        if(s != null){
+                    if(s != null){
 
-                            Toast.makeText(getApplicationContext(),"Hello "+s+" "+usernameString,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Hello "+s+" "+usernameString,Toast.LENGTH_SHORT).show();
 
-                            //to go to EspaceUser when Authentification is succesfull
-                            Intent intent = new Intent(getApplicationContext(),EspaceUser.class);
-                            intent.putExtra("username",usernameString);
-                            startActivity(intent);
-                            finish();
-
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"Password or Username incorrect",Toast.LENGTH_SHORT).show();
-
-                        }
+                        //to go to EspaceUser when Authentification is succesfull
+                        Intent intent = new Intent(getApplicationContext(),EspaceUser.class);
+                        intent.putExtra("username",usernameString);
+                        startActivity(intent);
+                        finish();
 
                     }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(getApplicationContext(),"Error "+volleyError.getMessage(),Toast.LENGTH_SHORT).show();
-                        Log.i("EEA",volleyError.getStackTrace().toString());
+                    else{
+                        Toast.makeText(getApplicationContext(),"Password or Username incorrect",Toast.LENGTH_SHORT).show();
+
                     }
-                });
 
-                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                requestQueue.add(stringRequest);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Toast.makeText(getApplicationContext(),"Error "+volleyError.getMessage(),Toast.LENGTH_SHORT).show();
+                    Log.i("EEA",volleyError.getStackTrace().toString());
+                }
+            });
 
-            }
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+
         });
 
 

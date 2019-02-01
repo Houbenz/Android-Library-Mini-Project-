@@ -1,6 +1,8 @@
 package com.houbenz.webserviceclient.Beans;
 
-public class Ouvrage {
+import java.io.Serializable;
+
+public class Ouvrage implements Serializable {
 
 
 

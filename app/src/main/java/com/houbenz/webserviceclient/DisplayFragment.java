@@ -1,4 +1,4 @@
-package com.houbenz.webserviceclient.ViewModel;
+package com.houbenz.webserviceclient;
 
 
 import android.os.Bundle;
@@ -24,8 +24,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.houbenz.webserviceclient.Adapter.OuvrageAdapter;
+import com.houbenz.webserviceclient.Adapter.VerticalSpaceItemDecoration;
 import com.houbenz.webserviceclient.Beans.Ouvrage;
 import com.houbenz.webserviceclient.R;
+import com.houbenz.webserviceclient.ViewModel.SharedViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,30 +67,14 @@ public class DisplayFragment extends Fragment {
         recycleOuvrage=(RecyclerView) frame.findViewById(R.id.recyclerOuvrage);
         recycleOuvrage.setHasFixedSize(true);
 
+        recycleOuvrage.addItemDecoration(new VerticalSpaceItemDecoration(32));
         //create and set the layoutmanager for recycler
         layoutManager = new LinearLayoutManager(getContext());
         recycleOuvrage.setLayoutManager(layoutManager);
 
-       /* ArrayList<Ouvrage> ouvrages = new ArrayList<>();
-
-        Ouvrage ouvrage = new Ouvrage();
-        ouvrage.setTitre("Houoo");
-
-        ouvrages.add(ouvrage);
-        ouvrages.add(ouvrage);
-        ouvrages.add(ouvrage);
-        ouvrages.add(ouvrage);
-        ouvrages.add(ouvrage);
-        ouvrages.add(ouvrage);
-        ouvrages.add(ouvrage);
-        ouvrages.add(ouvrage);
-
-        adapter = new OuvrageAdapter(ouvrages);
-        recycleOuvrage.setAdapter(adapter);*/
-
-
         //Event for when the enter button is pressed
         titreEdit.setOnKeyListener((view, keyCode, keyEvent) -> {
+
             if((keyEvent.getAction()==KeyEvent.ACTION_DOWN) && keyCode==KeyEvent.KEYCODE_ENTER){
 
                 String titre =titreEdit.getText().toString();
@@ -104,8 +90,12 @@ public class DisplayFragment extends Fragment {
 
                         ArrayList<Ouvrage> ouvrages = new ArrayList<Ouvrage>(Arrays.asList(ouvs));
 
-                             adapter = new OuvrageAdapter(ouvrages);
-                             recycleOuvrage.setAdapter(adapter);
+
+                            model.getUsername().observe(getActivity(),username ->{
+
+                                adapter = new OuvrageAdapter(ouvrages,username);
+                                recycleOuvrage.setAdapter(adapter);
+                            });
 
                     }
 

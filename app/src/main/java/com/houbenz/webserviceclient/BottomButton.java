@@ -1,14 +1,11 @@
 package com.houbenz.webserviceclient;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.houbenz.webserviceclient.ViewModel.DisplayFragment;
 import com.houbenz.webserviceclient.ViewModel.SharedViewModel;
 
 import androidx.fragment.app.Fragment;

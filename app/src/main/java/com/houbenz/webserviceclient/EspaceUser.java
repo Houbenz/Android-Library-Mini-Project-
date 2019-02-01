@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
+import com.houbenz.webserviceclient.ViewModel.SharedViewModel;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 public class EspaceUser extends AppCompatActivity {
 
@@ -23,5 +26,8 @@ public class EspaceUser extends AppCompatActivity {
 
         wlcText.setText("Bonjour "+username);
 
+        SharedViewModel sharedViewModel = ViewModelProviders.of(this).get(SharedViewModel.class);
+
+        sharedViewModel.setUsername(username);
     }
 }
