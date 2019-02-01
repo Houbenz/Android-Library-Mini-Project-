@@ -1,6 +1,6 @@
 package com.houbenz.webserviceclient;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +18,8 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
                         if(s != null){
 
                             Toast.makeText(getApplicationContext(),"Hello "+s+" "+usernameString,Toast.LENGTH_SHORT).show();
+
+                            //to go to EspaceUser when Authentification is succesfull
+                            Intent intent = new Intent(getApplicationContext(),EspaceUser.class);
+                            intent.putExtra("username",usernameString);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Password or Username incorrect",Toast.LENGTH_SHORT).show();
 
                         }
 
