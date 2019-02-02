@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String s) {
 
-                    if(s != null){
+                    if(s.equals("\"etudiant\"") || s.equals("\"enseignant\"")){
 
                         Toast.makeText(getApplicationContext(),"Hello "+s+" "+usernameString,Toast.LENGTH_SHORT).show();
 
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                     else{
-                        Toast.makeText(getApplicationContext(),"Password or Username incorrect",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Nom utilisateur ou mot de passe incorrecte ! "+s,Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    Toast.makeText(getApplicationContext(),"Error "+volleyError.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Une erreur est survenue, verifier votre connexion",Toast.LENGTH_SHORT).show();
                     Log.i("EEA",volleyError.getStackTrace().toString());
                 }
             });
