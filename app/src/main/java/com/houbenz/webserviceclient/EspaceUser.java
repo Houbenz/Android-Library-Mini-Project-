@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.houbenz.webserviceclient.ViewModel.SharedViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 public class EspaceUser extends AppCompatActivity {
@@ -29,5 +31,11 @@ public class EspaceUser extends AppCompatActivity {
         SharedViewModel sharedViewModel = ViewModelProviders.of(this).get(SharedViewModel.class);
 
         sharedViewModel.setUsername(username);
+
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction=manager.beginTransaction();
+        transaction.replace(R.id.displayFrag,new DisplayFragment());
+        transaction.commit();
     }
 }

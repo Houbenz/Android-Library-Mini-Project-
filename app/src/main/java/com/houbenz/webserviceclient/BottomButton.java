@@ -45,6 +45,16 @@ public class BottomButton extends Fragment {
 
         });
 
+        resvButton.setOnClickListener(view ->{
+
+            FragmentManager manager = getActivity().getSupportFragmentManager();
+            FragmentTransaction transaction=manager.beginTransaction();
+            transaction.replace(R.id.displayFrag,new ConsulterReservation());
+            transaction.commit();
+        });
+
+
+
 
         return frame;
     }

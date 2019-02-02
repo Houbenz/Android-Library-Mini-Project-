@@ -1,43 +1,44 @@
 package com.houbenz.webserviceclient;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     Button authentification;
     EditText username;
     EditText password;
 
-
+    ImageView imageview2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         username=findViewById(R.id.usernameText);
         password=findViewById(R.id.passwordText);
         authentification = findViewById(R.id.authentification);
+
+
 
         authentification.setOnClickListener(view -> {
 
@@ -79,9 +80,6 @@ public class MainActivity extends AppCompatActivity {
             requestQueue.add(stringRequest);
 
         });
-
-
-
 
 
 

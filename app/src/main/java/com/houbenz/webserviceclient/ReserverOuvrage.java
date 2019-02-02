@@ -3,8 +3,10 @@ package com.houbenz.webserviceclient;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,12 +15,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.houbenz.webserviceclient.Beans.Ouvrage;
+import com.squareup.picasso.Picasso;
 
 public class ReserverOuvrage extends AppCompatActivity {
 
     TextView auteurTv,themeTv,titreTv,mot_cleTv,etatOuvrage,result_reserve;
     Button reserver,annuler;
 
+    ImageView imageOuv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +32,8 @@ public class ReserverOuvrage extends AppCompatActivity {
         String username = getIntent().getStringExtra("username");
 
 
-        Toast.makeText(getApplicationContext(),ouvrage.getTitre(),Toast.LENGTH_LONG).show();
+
+
 
         auteurTv=findViewById(R.id.auteurTv);
         themeTv=findViewById(R.id.themeTv);
@@ -36,14 +41,23 @@ public class ReserverOuvrage extends AppCompatActivity {
         mot_cleTv=findViewById(R.id.mot_cleTv);
         etatOuvrage=findViewById(R.id.etatOuvrage);
         result_reserve=findViewById(R.id.result_reserve);
-
+        imageOuv = findViewById(R.id.imageOuv);
         reserver=findViewById(R.id.reserverBtn);
         annuler=findViewById(R.id.annulerBtn);
+
+
+
 
         if(ouvrage != null){
             auteurTv.setText("Auteur : "+ouvrage.getAuteur());
             themeTv.setText("Theme : "+ouvrage.getTheme());
             titreTv.setText("Titre : "+ouvrage.getTitre());
+
+
+
+            String imgurl = "http://192.168.43.210:7000/getImage?codebar="+ouvrage.getCodebar();
+            Picasso.get().load(imgurl).into(imageOuv);
+
 
             String url ="http://192.168.43.210:7000/IsOuvrageLibre?codebar="+ouvrage.getCodebar();
             StringRequest request = new StringRequest(Request.Method.GET,url,response -> {

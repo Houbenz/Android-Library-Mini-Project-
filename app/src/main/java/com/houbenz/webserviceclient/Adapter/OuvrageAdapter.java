@@ -1,16 +1,19 @@
 package com.houbenz.webserviceclient.Adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.houbenz.webserviceclient.Beans.Ouvrage;
 import com.houbenz.webserviceclient.R;
 import com.houbenz.webserviceclient.ReserverOuvrage;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -59,11 +62,18 @@ public class OuvrageAdapter extends RecyclerView.Adapter<OuvrageAdapter.MyViewHo
         TextView titre =holder.view.findViewById(R.id.TitreTv);
         TextView auteur = holder.view.findViewById(R.id.auteurTv);
         TextView theme = holder.view.findViewById(R.id.themeTv);
-        //TextView mot_cle=holder.view.findViewById(R.id.mot_cleTv);
+        ImageView imageOuv = holder.view.findViewById(R.id.imageOuv);
+
         titre.setText("Titre : "+ouvrage.getTitre());
         auteur.setText("Auteur : "+ouvrage.getAuteur());
         theme.setText("Theme : "+ouvrage.getTheme());
-        //mot_cle.setText(ouvrage.getMot_cle());
+
+        String imgurl = "http://192.168.43.210:7000/getImage?codebar="+ouvrage.getCodebar();
+
+        //Picasso to get the image from server
+        Log.i("CODEBAR","this is the code bar"+ouvrage.getCodebar());
+
+        Picasso.get().load(imgurl).into(imageOuv);
 
         holder.view.setOnClickListener(new OnClickListener() {
             @Override
